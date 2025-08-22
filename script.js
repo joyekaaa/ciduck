@@ -1,4 +1,4 @@
-const answers = ['api', 'bebek', 'juli', 'wukong', 'maret'];
+const answers = ['api', 'bebek', 'maret', 'wukong', '3 september'];
 let currentLevel = 0;
 
 // DOM Elements
@@ -148,4 +148,5 @@ function createStar(centerX, centerY, angle, burstIdx) {
   }, 60);
   setTimeout(() => star.remove(), 1200);
   fireworks.appendChild(star);
+
 }
