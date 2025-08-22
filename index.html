@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday Ciaaa!!!</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Home / Landing Page -->
+    <section id="home" class="center-content">
+      <img src="duck-cia.png" alt="Cia Duck" class="duck-img" />
+      <h1>Happy Birthday Ciaaa!!!</h1>
+      <h2>Let's Solve This Game to Get Your Birthday Gift!</h2>
+      <button id="startBtn" class="btn-primary">Start Game</button>
+    </section>
+
+    <!-- Game Page -->
+    <section id="game" class="center-content hidden">
+      <div class="game-box">
+        <div class="level-indicator">Level <span id="levelNum">1</span>/5</div>
+        <div class="input-row">
+          <span class="input-number" id="inputNum">1.</span>
+          <input type="text" id="answerInput" placeholder="Type your answer..." autocomplete="off" />
+        </div>
+        <button id="submitBtn" class="btn-primary">Submit</button>
+        <div id="gameMsg" class="game-msg"></div>
+      </div>
+    </section>
+
+    <!-- Birthday Congratulation Page -->
+    <section id="congrats" class="center-content hidden">
+      <div id="fireworks"></div>
+      <h1>Happy Birthday Bebekkkk</h1>
+      <div class="congrats-msg">
+        <p>halo haloo cibekkkk 🐣🐣🐣 wkwkwkwkwkk, wihhhh congratsss yaaaa udah nyelesain semua pertanyaan random yang ada dan thank youu yaaa udah mau mainin dan selesain game ini wkwkwkwkkwkwk. Semakin bertumbuh dan semakin berakar kuat yang sangat-sangat dalam didalam Tuhan dan buah dari pohon yang kamu bangun atas hubunganmu bersama Tuhan bisa jadi berkat buatmu dan orang disekitarmu seturut dengan visi hidupmu, yaitu agar dapat menjadi berkat untuk orang banyak. Mendapat berkat, urapan dan visi yang baru bagi dirimu, keluargamu, bisnismu, dan setiap aspek yang ada didalam dirimu. Semakin dipakai dengan luar biasa didalam pelayanan dan kepemimpinanmu, Aku percaya melalui setiap usahamu dan tuntunan dari Tuhan akan banyak anak-anak dan pemimpin-pemimpin kuat yang akan kamu bangkitkan dan setiap anak yang dipercayakan kepada kamu akan semakin terus bertumbuh dan memiliki hubungan yang dalam juga bersama Tuhan. Biarlah api dan minyak yang ada didalam dirimu akan terus Tuhan tambahkan dan bakar serta tidak akan pernah padam karena bukan berdasarkan usahamu tapi ada karya Tuhan yang luar biasa didalam hidupmu. Selalu izinkan Tuhan untuk terus bisa intervensi didalam hidupmu yaaa. Aku release berkat dan urapan yang terbaik untukmu di tahun dan umurmu yang ke 23 di tahun ini, setiap aspek hidupmu akan Tuhan bentuk, jagai dan sempurnakan seturut rencana-Nya, biarlah Tuhan yang membantu menjagai & menopang imanmu serta menuntunmu selalu agar kamu terus dijalannya dan tidak bisa meninggalkan-Nya. AMINNNN.</p>
+        <p>I'm so glad & happy to know youuu wahaiii bebek gengsian 🐥🐥🐥 wkwkwkwkwk, oiyaaa bener juga, semoga jangan gengsian lagi yaaa wkwkwkkwk, boleh kali diturunin dikit hwehwehwe🧐, semoga bisa kuat-kuat yaaa sama setiap keunikan akuuu wkwkwkwkk (harusnya mahh aman aja lahhh yaaa, kamu kan lebih aneh dari aku yaaa 😋). Hmmmm apaa lagi yaaa wkwkwkwk, yudh closing dehhh wwkkwkk, intinya wish youuu all the besttt, i hope i can always be there in every season of your life, i'm very grateful and thankful to God for being able to meet you.</p>
+        <p>God Bless Youuuuuu🥳🥳🥳!!!!</p>
+      </div>
+      <button id="touchBtn" class="btn-secondary">Touch Me</button>
+    </section>
+
+    <!-- Popup for Gift Code -->
+    <div id="popup" class="popup hidden">
+      <div class="popup-content">
+        <h1>CLAIM YOUR SPECIAL GIFT!</h1>
+        <h2>please inform the Joyeka the voucher code to claim your gift</h2>
+        <div class="voucher-code">CIDUCK23</div>
+        <button id="closePopup" class="btn-primary">Close</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
