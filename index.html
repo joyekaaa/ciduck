@@ -47,13 +47,32 @@
         <h1>CLAIM YOUR SPECIAL GIFT!</h1>
         <h2>please inform the Joyeka the voucher code to claim your gift</h2>
         <div class="voucher-code">CIDUCK23</div>
+        <button id="popupNext" class="btn-primary">Next</button>
         <button id="closePopup" class="btn-primary">Close</button>
+      </div>
+    </div>
+    
+      <!-- Popup for Voucher Input Validation -->
+    <div id="voucherPopup" class="popup hidden">
+      <div class="popup-content">
+        <h1>Enter Voucher Code</h1>
+        <input type="text" id="voucherInput" class="voucher-input" placeholder="Enter voucher code..." autocomplete="off" />
+        <div id="voucherMsg" class="game-msg"></div>
+        <button id="voucherSubmit" class="btn-primary">Submit</button>
+        <button id="voucherClose" class="btn-secondary">Close</button>
+      </div>
+    </div>
+
+    <!-- Popup for Love Photo Animation -->
+    <div id="lovePopup" class="popup hidden">
+      <div class="popup-content love-popup-content">
+        <h1 class="love-title">HAPPY BIRTHDAY BEBEKKKK</h1>
+        <div id="loveHeart" class="love-heart"></div>
+        <div class="love-bottom-text">LOVE YOUU MOREEE!</div>
+        <button id="loveClose" class="btn-primary">Close</button>
       </div>
     </div>
   </div>
   <script src="script.js"></script>
 </body>
-
 </html>
-
-
