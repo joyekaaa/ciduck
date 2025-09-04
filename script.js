@@ -1,4 +1,4 @@
-const answers = ['api', 'bebek', 'maret', 'wukong', '3 september'];
+const answers = ['api', 'bebek', 'maret', 'wukong', '10 september'];
 let currentLevel = 0;
 
 // DOM Elements
@@ -14,7 +14,21 @@ const inputNum = document.getElementById('inputNum');
 const touchBtn = document.getElementById('touchBtn');
 const popup = document.getElementById('popup');
 const closePopup = document.getElementById('closePopup');
+const popupNext = document.getElementById('popupNext');
 const fireworks = document.getElementById('fireworks');
+
+// New Elements
+const voucherPopup = document.getElementById('voucherPopup');
+const voucherInput = document.getElementById('voucherInput');
+const voucherSubmit = document.getElementById('voucherSubmit');
+const voucherClose = document.getElementById('voucherClose');
+const voucherMsg = document.getElementById('voucherMsg');
+
+const lovePopup = document.getElementById('lovePopup');
+const loveHeart = document.getElementById('loveHeart');
+const loveClose = document.getElementById('loveClose');
+
+const VOUCHER_CODE = 'CIDUCK23';
 
 // Show/Hide helpers
 function showSection(sec) {
@@ -76,6 +90,140 @@ touchBtn.onclick = () => {
 closePopup.onclick = () => {
   hidePopup();
 };
+// --- Event: Next on popup (show voucher input popup) ---
+popupNext.onclick = () => {
+  hidePopup();
+  showVoucherPopup();
+};
+
+// --- Voucher input popup logic ---
+function showVoucherPopup() {
+  voucherPopup.classList.remove('hidden');
+  voucherInput.value = '';
+  voucherMsg.textContent = '';
+  voucherInput.focus();
+}
+function hideVoucherPopup() { voucherPopup.classList.add('hidden'); }
+
+voucherClose.onclick = hideVoucherPopup;
+voucherSubmit.onclick = validateVoucherInput;
+voucherInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') validateVoucherInput();
+});
+function validateVoucherInput() {
+  const inputVal = voucherInput.value.trim().toUpperCase();
+  if (!inputVal) {
+    voucherMsg.textContent = "Silakan masukkan kode voucher-nya yaa!";
+    return;
+  }
+  if (inputVal === VOUCHER_CODE) {
+    voucherMsg.textContent = "Voucher benar! 🎁";
+    setTimeout(() => {
+      hideVoucherPopup();
+      showLovePopup();
+    }, 800);
+  } else {
+    voucherMsg.textContent = "Kode salah, coba lagi yaa!";
+    voucherInput.value = '';
+    voucherInput.focus();
+  }
+}
+
+// Matrix LOVE heart style (sama seperti sebelumnya)
+const heartMatrix = [
+  [0,0,1,1,0,0,0,0,1,1,0,0],
+  [0,1,1,1,1,0,0,1,1,1,1,0],
+  [1,1,1,1,1,1,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1,1,1,1,1],
+  [1,1,1,1,1,1,1,1,1,1,1,1],
+  [0,1,1,1,1,1,1,1,1,1,1,0],
+  [0,0,1,1,1,1,1,1,1,1,0,0],
+  [0,0,0,1,1,1,1,1,1,0,0,0],
+  [0,0,0,0,1,1,1,1,0,0,0,0],
+  [0,0,0,0,0,1,1,0,0,0,0,0],
+  [0,0,0,0,0,1,0,0,0,0,0,0],
+];
+
+// === Konfigurasi lokal ===
+const LOCAL_PHOTO_PATH = 'assets';              // folder foto lokal (samakan dgn lokasi file)
+
+// Buat daftar nama file statis pola "ciat (n).jpg"
+const TOTAL_PHOTOS = 158; // ubah jika jumlahnya beda
+const driveIds = Array.from({ length: TOTAL_PHOTOS }, (_, i) => `ciat (${i + 1}).jpg`);
+
+function getRandomPhotoUrls(ids, n) {
+  // Fisher–Yates shuffle
+  const a = ids.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  const picked = a.slice(0, Math.min(n, a.length));
+  while (picked.length < n) {
+    picked.push(...a.slice(0, Math.min(n - picked.length, a.length)));
+  }
+  // encodeURIComponent penting buat nama file ber-spasi/kurung
+  return picked.map(name => `${LOCAL_PHOTO_PATH}/${encodeURIComponent(name)}`);
+}
+
+// --- FUNGSI POPUP LOVE ---
+function showLovePopup() {
+  loveHeart.innerHTML = '';
+  const countPhotos = heartMatrix.flat().filter(x => x === 1).length;
+  const photoUrls = getRandomPhotoUrls(driveIds, countPhotos);
+  let photoIdx = 0;
+  const rows = heartMatrix.length;
+  const cols = heartMatrix[0].length;
+  loveHeart.style.display = "grid";
+  
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (heartMatrix[r][c] === 1) {
+        const img = document.createElement('img');
+        img.src = photoUrls[photoIdx % photoUrls.length];
+        img.alt = `photo-${photoIdx+1}`;
+        img.className = 'heart-photo';
+        // img.style.opacity = '0';
+        loveHeart.appendChild(img);
+        photoIdx++;
+      } else {
+        const empty = document.createElement('div');
+        empty.className = 'heart-empty';
+        loveHeart.appendChild(empty);
+      }
+    }
+  }
+  lovePopup.classList.remove('hidden');
+  loveClose.addEventListener('click', hideLovePopup);
+  animateLovePhotos();
+}
+
+function hideLovePopup() {
+  lovePopup.classList.add('hidden');
+  // Bersihkan isi agar tidak menumpuk jika dibuka lagi
+  loveHeart.innerHTML = '';
+}
+
+function animateLovePhotos() {
+  const imgs = Array.from(loveHeart.getElementsByClassName('heart-photo'));
+  const delay = 120;
+
+  imgs.forEach((img, i) => {
+    const reveal = () => setTimeout(() => img.classList.add('visible'), delay * i);
+    if (img.complete) {
+      // Sudah ter-cache/selesai load
+      reveal();
+    } else {
+      img.onload = reveal;
+      img.onerror = () => {
+        // Fallback kalau gambar gagal load: tetap tampilkan kotaknya
+        img.style.opacity = '1';
+        img.style.objectFit = 'cover';
+        img.classList.add('visible');
+      };
+    }
+  });
+}
 
 // Fireworks Animation - More Meriah!
 function launchFireworks() {
@@ -148,5 +296,4 @@ function createStar(centerX, centerY, angle, burstIdx) {
   }, 60);
   setTimeout(() => star.remove(), 1200);
   fireworks.appendChild(star);
-
 }
